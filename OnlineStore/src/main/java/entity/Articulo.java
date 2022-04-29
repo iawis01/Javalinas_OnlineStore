@@ -4,12 +4,26 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "articulos", schema = "fp_206_java_con_mysql", catalog = "")
+@NamedQueries({
+        @NamedQuery(name = "Articulo.findAll", query = "SELECT a FROM Articulo a")
+})
 public class Articulo {
     private String codigo;
     private String descripcion;
     private Double pvp;
     private Double gastosEnvio;
     private int tiempoPreparacion;
+
+    public Articulo() {
+    }
+
+    public Articulo(String codigo, String descripcion, Double pvp, Double gastosEnvio, int tiempoPreparacion) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.pvp = pvp;
+        this.gastosEnvio = gastosEnvio;
+        this.tiempoPreparacion = tiempoPreparacion;
+    }
 
     @Id
     @Column(name = "codigo")
