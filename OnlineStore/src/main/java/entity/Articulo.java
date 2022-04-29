@@ -17,6 +17,10 @@ public class Articulo {
     public Articulo() {
     }
 
+    public Articulo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public Articulo(String codigo, String descripcion, Double pvp, Double gastosEnvio, int tiempoPreparacion) {
         this.codigo = codigo;
         this.descripcion = descripcion;

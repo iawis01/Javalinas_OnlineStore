@@ -29,8 +29,16 @@ public class Vista {
         System.out.println("0. Volver al menu principal");
         System.out.println("1. Agregar un articulo");
         System.out.println("2. Mostrar los articulos");
+        System.out.println("3. Editar un articulo");
+        System.out.println("4. Eliminar un articulo");
 
-        return getInput(2);
+        return getInput(4);
+    }
+
+    public void recordatorioEliminarArticulo(){
+        System.out.println("\nAcuérdese de insertar todos los campos del articulo a eliminar\n");
+
+
     }
 
 
@@ -71,11 +79,43 @@ public class Vista {
         return parametros;
     }
 
+    public List<Object> printIntroduceCodigoArticulo(){
+
+        String codigo;
+
+        List<Object> parametros = new ArrayList<>();
+
+        //Vamos a llenar esta lista parametros con los diferentes atributos
+        System.out.println("Introduce el código del producto.");
+        //También podría valer codigo = teclado.nextline(); Mejor modularizarlo más
+        codigo = getString();
+        parametros.add(codigo);
+
+        //Devolver al controlador los parametros para crear el articulo
+        return parametros;
+    }
+
     public void articuloCreado(Boolean creado) {
         if (creado) {
             System.out.println("Se ha creado el articulo");
         } else {
             System.err.println("Ha habido un error al crear el articulo");
+        }
+    }
+
+    public void articuloEditado(Boolean editado) {
+        if (editado) {
+            System.out.println("Se ha editado el articulo");
+        } else {
+            System.err.println("Ha habido un error al editar el articulo");
+        }
+    }
+
+    public void articuloEliminado(Boolean editado) {
+        if (editado) {
+            System.out.println("Se ha eliminado el articulo");
+        } else {
+            System.err.println("Ha habido un error al eliminar el articulo");
         }
     }
 

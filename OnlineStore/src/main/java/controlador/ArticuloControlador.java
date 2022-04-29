@@ -45,6 +45,7 @@ public class ArticuloControlador {
         }catch(Exception e){
             //Método para regresar al estado anterior si hay errores
             em.getTransaction().rollback();
+            e.printStackTrace();
         }
     }
 
@@ -62,8 +63,8 @@ public class ArticuloControlador {
         try{
             //Con el entityManager, creamos la transacción
             em.getTransaction().begin();
-            //merge para editar en la base de datos
-            em.remove(articulo);
+            //remove para eliminar en la base de datos
+            em.remove(em.merge(articulo));
             //commit para insertar la transaccion
             em.getTransaction().commit();
 
