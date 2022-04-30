@@ -7,6 +7,7 @@ import vista.Vista;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Controlador {
@@ -321,26 +322,30 @@ public class Controlador {
 
     public void agregarPedido() {
         boolean creado = false;
-        List parametros = new ArrayList<>();
+        String emailCliente = vista.printAgregarEmailPedido();
+        String codigoArticulo = vista.printAgregarArticuloPedido();
+        int cantidad = vista.printAgregarCantidadPedido();
+        Cliente clientePedido = cc.buscarClientePorEmail(emailCliente);
+        Articulo articuloPedido = ac.buscarArticuloPorCodigo(codigoArticulo);
 
-        parametros = vista.printAgregarPedido();
+        Date date = new Date();
+        java.sql.Timestamp dateSQL = new java.sql.Timestamp(date.getTime());
 
+        boolean procesado = false;
 
-        //si la información no está vacia
-        if (!parametros.isEmpty()) {
             //NO HAY QUE HACER COMPROBACION DE QUE EXISTA
             //EL JPA YA TE IMPIDE CREAR UN pedido CON UNA LLAVE PRIMARIA DUPLICADA
 
             try {
                 //Creamos un nuevo objeto pedido y le pasamos los parámetros obtenidos en la vista
-                Pedido pedido = new Pedido(/**/);
+                Pedido pedido = new Pedido(clientePedido, articuloPedido, cantidad, dateSQL, procesado);
                 //Utilizamos la instancia de ArticuloControlador que hemos hecho arriba y lo utilizamos para crear
                 pc.crear(pedido);
                 creado = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+
         vista.pedidoCreado(creado);
     }
 
@@ -355,16 +360,23 @@ public class Controlador {
 
     public void editarPedido() {
         boolean editado = false;
-        List parametros = vista.printAgregarPedido();
+        int numeroPedido = vista.printAgregarNumeroPedido();
 
-        //si la información no está vacia
-        if (!parametros.isEmpty()) {
-            //NO HAY QUE HACER COMPROBACION DE QUE EXISTA
-            //EL JPA YA TE IMPIDE CREAR UN ARTICULO CON UNA LLAVE PRIMARIA DUPLICADA
+        String emailCliente = vista.printAgregarEmailPedido();
+        String codigoArticulo = vista.printAgregarArticuloPedido();
+        int cantidad = vista.printAgregarCantidadPedido();
+        Cliente clientePedido = cc.buscarClientePorEmail(emailCliente);
+        Articulo articuloPedido = ac.buscarArticuloPorCodigo(codigoArticulo);
+
+        Date date = new Date();
+        java.sql.Timestamp dateSQL = new java.sql.Timestamp(date.getTime());
+
+        boolean procesado = false;
+
 
             try {
-                //Creamos un nuevo objeto artículo y le pasamos los parámetros obtenidos en la vista
-                Pedido pedido = new Pedido(/**/);
+                //Creamos un nuevo objeto pedido y le pasamos los parámetros obtenidos en la vista y en los diferentes controladores
+                Pedido pedido = new Pedido(numeroPedido, clientePedido, articuloPedido, cantidad, dateSQL, procesado);
 
                 //Ahora editamos
                 pc.editar(pedido);
@@ -373,34 +385,25 @@ public class Controlador {
                 e.printStackTrace();
             }
 
-        }
+
         vista.pedidoEditado(editado);
     }
 
 
     public void eliminarPedido() {
         boolean eliminado = false;
-        vista.recordatorioEliminarCliente();
-        List parametros = vista.printAgregarPedido();
-
-
-        //si la información no está vacia
-        if (!parametros.isEmpty()) {
-            //NO HAY QUE HACER COMPROBACION DE QUE EXISTA
-            //EL JPA YA TE IMPIDE CREAR UN ARTICULO CON UNA LLAVE PRIMARIA DUPLICADA Y TE AVISA
+        int numeroPedido = vista.printAgregarNumeroPedido();
 
             try {
-                //TODO articulo sea un articulo pasado por buscarArticuloPorId
+                Pedido pedido = pc.buscarPedidoPorNumero(numeroPedido);
 
-                //Creamos un nuevo objeto artículo y le pasamos los parámetros obtenidos en la vista
-                Pedido pedido = new Pedido();
-                //Utilizamos la instancia de ArticuloControlador que hemos hecho arriba y lo utilizamos para crear
+                //Utilizamos la instancia de PedidoControlador que hemos hecho arriba y lo utilizamos para crear
                 pc.eliminar(pedido);
                 eliminado = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+
         vista.pedidoEliminado(eliminado);
     }
 

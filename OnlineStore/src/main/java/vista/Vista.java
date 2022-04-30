@@ -234,41 +234,6 @@ public class Vista {
         }
     }
 
-    public List<Object> printEliminarCliente() {
-
-        String nombre;
-        String domicilio;
-        String nif;
-        String email;
-
-        List<Object> parametros = new ArrayList<>();
-
-        System.out.println("Introduzca el email");
-        email = getString();
-        parametros.add(email);
-
-        System.out.println("Introduzca el nombre");
-        nombre = getString();
-        parametros.add(nombre);
-
-        System.out.println("Introduzca el domicilio");
-        domicilio = getString();
-        parametros.add(domicilio);
-
-        System.out.println("Introduzca el nif");
-        nif = getString();
-        parametros.add(nif);
-
-
-        return parametros;
-
-    }
-
-    public void recordatorioEliminarCliente() {
-        System.out.println("\nAcuérdese de insertar todos los campos del cliente a eliminar\n");
-        System.out.println("\nEmail, nombre, domicilio y nif.\n");
-
-    }
 
     public void printMostrarClientes(List<Cliente> lista) {
         System.out.println("\nLista de clientes");
@@ -317,51 +282,41 @@ public class Vista {
         return getInput(6);
     }
 
-    public List<Object> printAgregarPedido() {
+    public int printAgregarNumeroPedido(){
 
-        //El numero del pedido es autoincremental, no hay que añadirlo
-        //int numeroPedido;
+            int numeroPedido;
 
-        String emailCliente;
-        String codigoArticulo;
+            System.out.println("Introduzca el numero del pedido");
+            numeroPedido = getInt();
 
-
-        int cantidad;
-
-        List<Object> parametros = new ArrayList<>();
-
-        System.out.println("Introduzca el email");
-        emailCliente = getString();
-        parametros.add(emailCliente);
-
-        System.out.println("Introduzca el codigo del articulo");
-        codigoArticulo = getString();
-        parametros.add(codigoArticulo);
-
-        System.out.println("Introduzca la cantidad");
-        cantidad = getInt();
-        parametros.add(cantidad);
-
-
-
-        return parametros;
+            return numeroPedido;
 
     }
 
-    public List<Object> printIntroduceCodigoPedido() {
 
-        int numeroPedido;
+    public String printAgregarEmailPedido(){
+        System.out.println("\nIntroduce información del pedido: ");
+        System.out.println("Introduzca el email del cliente del pedido");
+        String emailCliente = getString();
+        return emailCliente;
 
-        List<Object> parametros = new ArrayList<>();
+    }
 
-        //Vamos a llenar esta lista parametros con los diferentes atributos
-        System.out.println("Introduce el codigo del pedido.");
-        //También podría valer codigo = teclado.nextline(); Mejor modularizarlo más
-        numeroPedido = getInt();
-        parametros.add(numeroPedido);
+    public String printAgregarArticuloPedido() {
+        String codigoArticulo;
 
-        //Devolver al controlador los parametros para crear el articulo
-        return parametros;
+        System.out.println("Introduzca el codigo del articulo del pedido");
+        codigoArticulo = getString();
+
+        return codigoArticulo;
+    }
+
+
+    public int printAgregarCantidadPedido(){
+        System.out.println("Introduzca la cantidad del pedido");
+        int cantidad = getInt();
+        return cantidad;
+
     }
 
     public void pedidoCreado(Boolean creado) {
@@ -388,11 +343,7 @@ public class Vista {
         }
     }
 
-    public void recordatorioEliminarPedido() {
-        System.out.println("\nAcuérdese de insertar todos los campos del pedido a eliminar\n");
-        System.out.println("\nnumeroPedido, emailCliente, codigoArticulo, cantidad, fecha y procesado.\n");
 
-    }
 
     public void printMostrarPedidos(List<Pedido> lista) {
         System.out.println("\nLista de clientes");

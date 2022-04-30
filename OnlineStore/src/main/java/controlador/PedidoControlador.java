@@ -5,6 +5,7 @@ import javax.persistence.Query;
 
 import conexion.Conexion;
 
+import entity.Cliente;
 import entity.Pedido;
 
 import java.util.List;
@@ -84,6 +85,15 @@ public class PedidoControlador {
         }catch(Exception e){
             //Método para regresar al estado anterior si hay errores
             em.getTransaction().rollback();
+        }
+    }
+
+    public Pedido buscarPedidoPorNumero(int numeroPedido) {
+        EntityManager em = entityManager();
+        try {
+            return em.find(Pedido.class, numeroPedido);
+        } finally {
+            em.close();
         }
     }
 

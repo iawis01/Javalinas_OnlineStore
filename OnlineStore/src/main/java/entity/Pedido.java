@@ -12,11 +12,13 @@ import java.sql.Timestamp;
 })
 public class Pedido {
     private int numeroPedido;
+
+    private Cliente clientesByEmailCliente;
+    private Articulo articulosByCodigoArticulo;
     private int cantidad;
     private Timestamp fecha;
     private boolean procesado;
-    private Cliente clientesByEmailCliente;
-    private Articulo articulosByCodigoArticulo;
+
 
     public Pedido() {
     }
@@ -25,21 +27,21 @@ public class Pedido {
         this.numeroPedido = numeroPedido;
     }
 
-    public Pedido(int numeroPedido, int cantidad, Timestamp fecha, boolean procesado, Cliente clientesByEmailCliente, Articulo articulosByCodigoArticulo) {
+    public Pedido(int numeroPedido, Cliente clientesByEmailCliente, Articulo articulosByCodigoArticulo, int cantidad, Timestamp fecha, boolean procesado) {
         this.numeroPedido = numeroPedido;
+        this.clientesByEmailCliente = clientesByEmailCliente;
+        this.articulosByCodigoArticulo = articulosByCodigoArticulo;
         this.cantidad = cantidad;
         this.fecha = fecha;
         this.procesado = procesado;
-        this.clientesByEmailCliente = clientesByEmailCliente;
-        this.articulosByCodigoArticulo = articulosByCodigoArticulo;
     }
 
-    public Pedido(int cantidad, Timestamp fecha, boolean procesado, Cliente clientesByEmailCliente, Articulo articulosByCodigoArticulo) {
+    public Pedido(Cliente clientesByEmailCliente, Articulo articulosByCodigoArticulo, int cantidad, Timestamp fecha, boolean procesado) {
+        this.clientesByEmailCliente = clientesByEmailCliente;
+        this.articulosByCodigoArticulo = articulosByCodigoArticulo;
         this.cantidad = cantidad;
         this.fecha = fecha;
         this.procesado = procesado;
-        this.clientesByEmailCliente = clientesByEmailCliente;
-        this.articulosByCodigoArticulo = articulosByCodigoArticulo;
     }
 
     @Id

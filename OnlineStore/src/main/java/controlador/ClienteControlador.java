@@ -95,7 +95,6 @@ public class ClienteControlador {
         } finally {
             em.close();
         }
-
     }
 
     //Conexion mediante la instancia de la clase Conexion
