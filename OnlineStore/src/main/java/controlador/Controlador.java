@@ -185,19 +185,30 @@ public class Controlador {
             //NO HAY QUE HACER COMPROBACION DE QUE EXISTA
             //EL JPA YA TE IMPIDE CREAR UN Cliente CON UNA LLAVE PRIMARIA DUPLICADA
 
-            try {
-                //Creamos un nuevo objeto artículo y le pasamos los parámetros obtenidos en la vista
-                Cliente cliente = new Cliente(parametros.get(0).toString(), parametros.get(1).toString(),
-                        parametros.get(2).toString(), parametros.get(3).toString(),
-                        (Integer) parametros.get(4), (Integer) parametros.get(5));
-                //Utilizamos la instancia de ArticuloControlador que hemos hecho arriba y lo utilizamos para crear
+            if(parametros.get(0).equals(1)) {
+                try {
+                    //Creamos un nuevo objeto artículo y le pasamos los parámetros obtenidos en la vista
+                    Cliente cliente = new Cliente(parametros.get(1).toString(), parametros.get(2).toString(),
+                            parametros.get(3).toString(), parametros.get(4).toString(),
+                            0, 0);
+                    //Utilizamos la instancia de ArticuloControlador que hemos hecho arriba y lo utilizamos para crear
+                    cc.crear(cliente);
+                    creado = true;
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else if(parametros.get(0).equals(2)){
+                Cliente cliente = new Cliente(parametros.get(1).toString(), parametros.get(2).toString(),
+                        parametros.get(3).toString(), parametros.get(4).toString(),
+                        30, 20);
                 cc.crear(cliente);
                 creado = true;
-            } catch (Exception e) {
-                e.printStackTrace();
+
             }
         }
         vista.clienteCreado(creado);
+
     }
 
     public void mostrarClientes() {
@@ -221,21 +232,30 @@ public class Controlador {
             //NO HAY QUE HACER COMPROBACION DE QUE EXISTA
             //EL JPA YA TE IMPIDE CREAR UN ARTICULO CON UNA LLAVE PRIMARIA DUPLICADA
 
-            try {
-                //Creamos un nuevo objeto artículo y le pasamos los parámetros obtenidos en la vista
-                Cliente cliente = new Cliente(parametros.get(0).toString(), parametros.get(1).toString(),
-                        parametros.get(2).toString(), parametros.get(3).toString(),
-                        (Integer) parametros.get(4), (Integer) parametros.get(5));
+            if(parametros.get(0).equals(1)) {
+                try {
+                    //Creamos un nuevo objeto artículo y le pasamos los parámetros obtenidos en la vista
+                    Cliente cliente = new Cliente(parametros.get(1).toString(), parametros.get(2).toString(),
+                            parametros.get(3).toString(), parametros.get(4).toString(),
+                            0, 0);
+                    //Utilizamos la instancia de ArticuloControlador que hemos hecho arriba y lo utilizamos para crear
+                    cc.editar(cliente);
+                    editado = true;
 
-                //Ahora editamos
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else if(parametros.get(0).equals(2)){
+                Cliente cliente = new Cliente(parametros.get(1).toString(), parametros.get(2).toString(),
+                        parametros.get(3).toString(), parametros.get(4).toString(),
+                        30, 20);
                 cc.editar(cliente);
                 editado = true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
+            }
         }
-        vista.clienteEditado(editado);
+        vista.clienteCreado(editado);
+
     }
 
 
@@ -246,7 +266,7 @@ public class Controlador {
         vista.recordatorioEliminarCliente();
 
 
-        parametros = vista.printAgregarCliente();
+        parametros = vista.printEliminarCliente();
 
 
         //si la información no está vacia
@@ -260,7 +280,7 @@ public class Controlador {
                 //Creamos un nuevo objeto artículo y le pasamos los parámetros obtenidos en la vista
                 Cliente cliente = new Cliente(parametros.get(0).toString(), parametros.get(1).toString(),
                         parametros.get(2).toString(), parametros.get(3).toString(),
-                        (Integer) parametros.get(4), (Integer) parametros.get(5));
+                        0, 0);
                 //Utilizamos la instancia de ArticuloControlador que hemos hecho arriba y lo utilizamos para crear
                 cc.eliminar(cliente);
                 eliminado = true;

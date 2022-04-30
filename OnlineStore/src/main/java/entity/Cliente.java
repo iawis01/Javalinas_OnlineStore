@@ -29,6 +29,13 @@ public class Cliente {
         this.descuento = descuento;
     }
 
+    public Cliente(String email, String nombre, String domicilio, String nif) {
+        this.email = email;
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.nif = nif;
+    }
+
     public Cliente(String nombre, String domicilio, String nif, int cuota, int descuento) {
         this.nombre = nombre;
         this.domicilio = domicilio;

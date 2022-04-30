@@ -154,6 +154,7 @@ public class Vista {
 
     public List<Object> printAgregarCliente() {
 
+        int tipoDeCliente;
         String nombre;
         String domicilio;
         String nif;
@@ -162,6 +163,15 @@ public class Vista {
         int descuento;
 
         List<Object> parametros = new ArrayList<>();
+
+        System.out.println("Introduzca el tipo de cliente");
+        System.out.println("1. Cliente estandard");
+        System.out.println("2. Cliente premium");
+
+        //este parámetro será el parametro 0, es un int con tipo de cliente que hemos metido en vista
+        tipoDeCliente = getInput(2);
+        parametros.add(tipoDeCliente);
+
 
         System.out.println("Introduzca el email");
         email = getString();
@@ -179,13 +189,6 @@ public class Vista {
         nif = getString();
         parametros.add(nif);
 
-        System.out.println("Introduzca la cuota");
-        cuota = getInt();
-        parametros.add(cuota);
-
-        System.out.println("Introduzca el descuento");
-        descuento = getInt();
-        parametros.add(descuento);
 
         return parametros;
 
@@ -231,9 +234,39 @@ public class Vista {
         }
     }
 
+    public List<Object> printEliminarCliente() {
+
+        String nombre;
+        String domicilio;
+        String nif;
+        String email;
+
+        List<Object> parametros = new ArrayList<>();
+
+        System.out.println("Introduzca el email");
+        email = getString();
+        parametros.add(email);
+
+        System.out.println("Introduzca el nombre");
+        nombre = getString();
+        parametros.add(nombre);
+
+        System.out.println("Introduzca el domicilio");
+        domicilio = getString();
+        parametros.add(domicilio);
+
+        System.out.println("Introduzca el nif");
+        nif = getString();
+        parametros.add(nif);
+
+
+        return parametros;
+
+    }
+
     public void recordatorioEliminarCliente() {
         System.out.println("\nAcuérdese de insertar todos los campos del cliente a eliminar\n");
-        System.out.println("\nEmail, nombre, domicilio, nif, cuota y descuento.\n");
+        System.out.println("\nEmail, nombre, domicilio y nif.\n");
 
     }
 
@@ -277,7 +310,7 @@ public class Vista {
         System.out.println("1. Agregar un pedido");
         System.out.println("2. Mostrar pedidos");
         System.out.println("3. Editar un pedido");
-        System.out.println("4. Eliminar un cliente");
+        System.out.println("4. Eliminar un pedido");
         System.out.println("5. Mostrar los pedidos pendientes de envio");
         System.out.println("6. Mostrar los pedidos enviados");
 
