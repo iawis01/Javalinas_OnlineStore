@@ -5,6 +5,7 @@ import javax.persistence.Query;
 
 import conexion.Conexion;
 
+import entity.Articulo;
 import entity.Cliente;
 
 import java.util.List;
@@ -85,6 +86,16 @@ public class ClienteControlador {
             //Método para regresar al estado anterior si hay errores
             em.getTransaction().rollback();
         }
+    }
+
+    public Cliente buscarClientePorEmail(String email) {
+        EntityManager em = entityManager();
+        try {
+            return em.find(Cliente.class, email);
+        } finally {
+            em.close();
+        }
+
     }
 
     //Conexion mediante la instancia de la clase Conexion

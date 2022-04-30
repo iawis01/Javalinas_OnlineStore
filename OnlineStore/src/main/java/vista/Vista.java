@@ -77,6 +77,13 @@ public class Vista {
         return parametros;
     }
 
+    public String printAgregarCodigoArticulo(){
+        System.out.println("Introduzca el codigo del articulo a eliminar");
+        String codigoArticulo = getString();
+        return codigoArticulo;
+
+    }
+
     public List<Object> printIntroduceCodigoArticulo() {
 
         String codigo;
@@ -194,21 +201,14 @@ public class Vista {
 
     }
 
-    public List<Object> printIntroduceEmailCliente() {
+    public String printAgregarEmailCliente(){
+        System.out.println("Introduzca el email del cliente a eliminar");
+        String emailCliente = getString();
+        return emailCliente;
 
-        String email;
-
-        List<Object> parametros = new ArrayList<>();
-
-        //Vamos a llenar esta lista parametros con los diferentes atributos
-        System.out.println("Introduce el email del cliente.");
-        //También podría valer codigo = teclado.nextline(); Mejor modularizarlo más
-        email = getString();
-        parametros.add(email);
-
-        //Devolver al controlador los parametros para crear el articulo
-        return parametros;
     }
+
+
 
     public void clienteCreado(Boolean creado) {
         if (creado) {

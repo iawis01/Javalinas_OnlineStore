@@ -124,25 +124,20 @@ public class Controlador {
 
     public void eliminarArticulo() {
         boolean eliminado = false;
-        List parametros = new ArrayList<>();
+        String codigoArticulo;
 
-        vista.recordatorioEliminarArticulo();
-
-
-        parametros = vista.printAgregarArticulo();
+        codigoArticulo = vista.printAgregarCodigoArticulo();
 
 
         //si la información no está vacia
-        if (!parametros.isEmpty()) {
+        if (!codigoArticulo.isEmpty()) {
             //NO HAY QUE HACER COMPROBACION DE QUE EXISTA
             //EL JPA YA TE IMPIDE CREAR UN ARTICULO CON UNA LLAVE PRIMARIA DUPLICADA Y TE AVISA
 
             try {
-                //TODO articulo sea un articulo pasado por buscarArticuloPorId
+                //Creamos un nuevo objeto artículo y le asignamos el articulo buscado por su codigo
+                Articulo articulo = ac.buscarArticuloPorCodigo(codigoArticulo);
 
-                //Creamos un nuevo objeto artículo y le pasamos los parámetros obtenidos en la vista
-                Articulo articulo = new Articulo(parametros.get(0).toString(), parametros.get(1).toString(),
-                        (Double) parametros.get(2), (Double) parametros.get(3), (Integer) parametros.get(4));
                 //Utilizamos la instancia de ArticuloControlador que hemos hecho arriba y lo utilizamos para crear
                 ac.eliminar(articulo);
                 eliminado = true;
@@ -261,26 +256,20 @@ public class Controlador {
 
     public void eliminarCliente() {
         boolean eliminado = false;
-        List parametros = new ArrayList<>();
+        String emailCliente;
 
-        vista.recordatorioEliminarCliente();
-
-
-        parametros = vista.printEliminarCliente();
+        emailCliente = vista.printAgregarEmailCliente();
 
 
         //si la información no está vacia
-        if (!parametros.isEmpty()) {
+        if (!emailCliente.isEmpty()) {
             //NO HAY QUE HACER COMPROBACION DE QUE EXISTA
             //EL JPA YA TE IMPIDE CREAR UN ARTICULO CON UNA LLAVE PRIMARIA DUPLICADA Y TE AVISA
 
             try {
-                //TODO articulo sea un articulo pasado por buscarArticuloPorId
 
-                //Creamos un nuevo objeto artículo y le pasamos los parámetros obtenidos en la vista
-                Cliente cliente = new Cliente(parametros.get(0).toString(), parametros.get(1).toString(),
-                        parametros.get(2).toString(), parametros.get(3).toString(),
-                        0, 0);
+                Cliente cliente = cc.buscarClientePorEmail(emailCliente);
+
                 //Utilizamos la instancia de ArticuloControlador que hemos hecho arriba y lo utilizamos para crear
                 cc.eliminar(cliente);
                 eliminado = true;
