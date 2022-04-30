@@ -350,6 +350,7 @@ public class Controlador {
     }
 
     public void mostrarPedidos() {
+        pc.actualizarPedidos();
         // Crear una array temporal para recibir articulos
         // Llenar la array con los articulos
         List<Pedido> lista = pc.getPedidos();
@@ -359,6 +360,7 @@ public class Controlador {
     }
 
     public void editarPedido() {
+        pc.actualizarPedidos();
         boolean editado = false;
         int numeroPedido = vista.printAgregarNumeroPedido();
 
@@ -391,9 +393,11 @@ public class Controlador {
 
 
     public void eliminarPedido() {
+        pc.actualizarPedidos();
         boolean eliminado = false;
         int numeroPedido = vista.printAgregarNumeroPedido();
 
+        
             try {
                 Pedido pedido = pc.buscarPedidoPorNumero(numeroPedido);
 
@@ -404,10 +408,13 @@ public class Controlador {
                 e.printStackTrace();
             }
 
+
+
         vista.pedidoEliminado(eliminado);
     }
 
     public void mostrarPedidosPendientes() {
+        pc.actualizarPedidos();
         // Crear una array temporal para recibir articulos
         // Llenar la array con los articulos
         List<Pedido> lista = pc.getPedidosPendientes();
@@ -417,6 +424,7 @@ public class Controlador {
     }
 
     public void mostrarPedidosEnviados() {
+        pc.actualizarPedidos();
         // Crear una array temporal para recibir articulos
         // Llenar la array con los articulos
         List<Pedido> lista = pc.getPedidosEnviados();
