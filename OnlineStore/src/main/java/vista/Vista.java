@@ -1,6 +1,8 @@
 package vista;
 
 import entity.Articulo;
+import entity.Cliente;
+import entity.Pedido;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +10,13 @@ import java.util.Scanner;
 
 public class Vista {
 
-    public Vista(){
+    public Vista() {
 
     }
 
 
     //Vista de menu
-    public int printMenu(){
+    public int printMenu() {
         System.out.println("Seleccione la gestión a realizar");
         System.out.println("1. Gestionar articulos");
         System.out.println("2. Gestionar clientes");
@@ -23,8 +25,11 @@ public class Vista {
 
         return getInput(3);
     }
+
+    //INICIO DE VISTA DE ARTICULOS
+
     //Vista de submenu para articulos
-    public int printMenuArticulos(){
+    public int printMenuArticulos() {
         System.out.println("\nSeleccione la acción a realizar");
         System.out.println("0. Volver al menu principal");
         System.out.println("1. Agregar un articulo");
@@ -35,14 +40,7 @@ public class Vista {
         return getInput(4);
     }
 
-    public void recordatorioEliminarArticulo(){
-        System.out.println("\nAcuérdese de insertar todos los campos del articulo a eliminar\n");
-
-
-    }
-
-
-    public List<Object> printAgregarArticulo(){
+    public List<Object> printAgregarArticulo() {
 
         String codigo;
         String descripcion;
@@ -79,7 +77,7 @@ public class Vista {
         return parametros;
     }
 
-    public List<Object> printIntroduceCodigoArticulo(){
+    public List<Object> printIntroduceCodigoArticulo() {
 
         String codigo;
 
@@ -119,41 +117,301 @@ public class Vista {
         }
     }
 
+    public void recordatorioEliminarArticulo() {
+        System.out.println("\nAcuérdese de insertar todos los campos del articulo a eliminar\n");
+        System.out.println("\nCodigo, descripcion, pvp, gastos_envio, tiempo_preparacion.\n");
+
+    }
+
 
     public void printMostrarArticulos(List<Articulo> lista) {
         System.out.println("\nLista de articulos");
         System.out.println("---------------------");
 
-        for (Object o : lista){
+        for (Object o : lista) {
             System.out.println(o);
             System.out.println("------------");
         }
     }
 
+    //FIN DE VISTA DE ARTICULOS
+
+
+    //INICIO DE VISTA DE CLIENTES
+
+    public int printMenuClientes() {
+        System.out.println("\nSeleccione la acción a realizar");
+        System.out.println("0. Volver al menu principal");
+        System.out.println("1. Agregar un cliente");
+        System.out.println("2. Mostrar los clientes");
+        System.out.println("3. Editar un cliente");
+        System.out.println("4. Eliminar un cliente");
+        System.out.println("5. Mostrar los clientes estandar");
+        System.out.println("6. Mostrar los clientes premium");
+
+        return getInput(6);
+    }
+
+    public List<Object> printAgregarCliente() {
+
+        String nombre;
+        String domicilio;
+        String nif;
+        String email;
+        int cuota;
+        int descuento;
+
+        List<Object> parametros = new ArrayList<>();
+
+        System.out.println("Introduzca el email");
+        email = getString();
+        parametros.add(email);
+
+        System.out.println("Introduzca el nombre");
+        nombre = getString();
+        parametros.add(nombre);
+
+        System.out.println("Introduzca el domicilio");
+        domicilio = getString();
+        parametros.add(domicilio);
+
+        System.out.println("Introduzca el nif");
+        nif = getString();
+        parametros.add(nif);
+
+        System.out.println("Introduzca la cuota");
+        cuota = getInt();
+        parametros.add(cuota);
+
+        System.out.println("Introduzca el descuento");
+        descuento = getInt();
+        parametros.add(descuento);
+
+        return parametros;
+
+    }
+
+    public List<Object> printIntroduceEmailCliente() {
+
+        String email;
+
+        List<Object> parametros = new ArrayList<>();
+
+        //Vamos a llenar esta lista parametros con los diferentes atributos
+        System.out.println("Introduce el email del cliente.");
+        //También podría valer codigo = teclado.nextline(); Mejor modularizarlo más
+        email = getString();
+        parametros.add(email);
+
+        //Devolver al controlador los parametros para crear el articulo
+        return parametros;
+    }
+
+    public void clienteCreado(Boolean creado) {
+        if (creado) {
+            System.out.println("Se ha creado el cliente");
+        } else {
+            System.err.println("Ha habido un error al crear el cliente");
+        }
+    }
+
+    public void clienteEditado(Boolean editado) {
+        if (editado) {
+            System.out.println("Se ha editado el articulo");
+        } else {
+            System.err.println("Ha habido un error al editar el articulo");
+        }
+    }
+
+    public void clienteEliminado(Boolean editado) {
+        if (editado) {
+            System.out.println("Se ha eliminado el cliente");
+        } else {
+            System.err.println("Ha habido un error al eliminar el cliente");
+        }
+    }
+
+    public void recordatorioEliminarCliente() {
+        System.out.println("\nAcuérdese de insertar todos los campos del cliente a eliminar\n");
+        System.out.println("\nEmail, nombre, domicilio, nif, cuota y descuento.\n");
+
+    }
+
+    public void printMostrarClientes(List<Cliente> lista) {
+        System.out.println("\nLista de clientes");
+        System.out.println("---------------------");
+
+        for (Object o : lista) {
+            System.out.println(o);
+            System.out.println("------------");
+        }
+    }
+
+    public void printMostrarClientesEstandar(List<Cliente> lista) {
+        System.out.println("\nLista de clientes estandar");
+        System.out.println("---------------------");
+
+        for (Object o : lista) {
+            System.out.println(o);
+            System.out.println("------------");
+        }
+    }
+
+    public void printMostrarClientesPremium(List<Cliente> lista) {
+        System.out.println("\nLista de clientes premium");
+        System.out.println("---------------------");
+
+        for (Object o : lista) {
+            System.out.println(o);
+            System.out.println("------------");
+        }
+    }
+    //FIN DE VISTA DE ARTICULOS
+
+
+    //INICIO DE VISTA DE PEDIDOS
+
+    public int printMenuPedidos() {
+        System.out.println("\nSeleccione la acción a realizar");
+        System.out.println("0. Volver al menu principal");
+        System.out.println("1. Agregar un pedido");
+        System.out.println("2. Mostrar pedidos");
+        System.out.println("3. Editar un pedido");
+        System.out.println("4. Eliminar un cliente");
+        System.out.println("5. Mostrar los pedidos pendientes de envio");
+        System.out.println("6. Mostrar los pedidos enviados");
+
+        return getInput(6);
+    }
+
+    public List<Object> printAgregarPedido() {
+
+        //El numero del pedido es autoincremental, no hay que añadirlo
+        //int numeroPedido;
+
+        String emailCliente;
+        String codigoArticulo;
+
+
+        int cantidad;
+
+        List<Object> parametros = new ArrayList<>();
+
+        System.out.println("Introduzca el email");
+        emailCliente = getString();
+        parametros.add(emailCliente);
+
+        System.out.println("Introduzca el codigo del articulo");
+        codigoArticulo = getString();
+        parametros.add(codigoArticulo);
+
+        System.out.println("Introduzca la cantidad");
+        cantidad = getInt();
+        parametros.add(cantidad);
 
 
 
+        return parametros;
+
+    }
+
+    public List<Object> printIntroduceCodigoPedido() {
+
+        int numeroPedido;
+
+        List<Object> parametros = new ArrayList<>();
+
+        //Vamos a llenar esta lista parametros con los diferentes atributos
+        System.out.println("Introduce el codigo del pedido.");
+        //También podría valer codigo = teclado.nextline(); Mejor modularizarlo más
+        numeroPedido = getInt();
+        parametros.add(numeroPedido);
+
+        //Devolver al controlador los parametros para crear el articulo
+        return parametros;
+    }
+
+    public void pedidoCreado(Boolean creado) {
+        if (creado) {
+            System.out.println("Se ha creado el pedido");
+        } else {
+            System.err.println("Ha habido un error al crear el pedido");
+        }
+    }
+
+    public void pedidoEditado(Boolean editado) {
+        if (editado) {
+            System.out.println("Se ha editado el pedido");
+        } else {
+            System.err.println("Ha habido un error al editar el pedido");
+        }
+    }
+
+    public void pedidoEliminado(Boolean editado) {
+        if (editado) {
+            System.out.println("Se ha eliminado el pedido");
+        } else {
+            System.err.println("Ha habido un error al eliminar el pedido");
+        }
+    }
+
+    public void recordatorioEliminarPedido() {
+        System.out.println("\nAcuérdese de insertar todos los campos del pedido a eliminar\n");
+        System.out.println("\nnumeroPedido, emailCliente, codigoArticulo, cantidad, fecha y procesado.\n");
+
+    }
+
+    public void printMostrarPedidos(List<Pedido> lista) {
+        System.out.println("\nLista de clientes");
+        System.out.println("---------------------");
+
+        for (Object o : lista) {
+            System.out.println(o);
+            System.out.println("------------");
+        }
+    }
+
+    public void printMostrarPedidosPendientes(List<Pedido> lista) {
+        System.out.println("\nLista de clientes estandar");
+        System.out.println("---------------------");
+
+        for (Object o : lista) {
+            System.out.println(o);
+            System.out.println("------------");
+        }
+    }
+
+    public void printMostrarPedidosEnviados(List<Pedido> lista) {
+        System.out.println("\nLista de clientes premium");
+        System.out.println("---------------------");
+
+        for (Object o : lista) {
+            System.out.println(o);
+            System.out.println("------------");
+        }
+    }
+    //FIN DE VISTA DE ARTICULOS
 
 
 
-
+    //METODOS PARA RECIBIR DIFERENTES TIPOS DE INPUT
     //Método para recibir el Input del usuario para el menú
-    public static int getInput(int max){
+    public static int getInput(int max) {
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
-        while(choice < 0 || choice > max){
+        while (choice < 0 || choice > max) {
             try {
                 System.out.print("\nIntroduzca la opcion: \n");
                 // recibir input en forma de String y parse a int
                 choice = Integer.parseInt(scanner.nextLine());
-            }
-            catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 // todo error personalizado en la clase de errores
                 System.err.println("Introduzca un numero valido\n");
             }
         }
         return choice;
     }
+
     // metodo para recibir un input en forma de string
     public static String getString() {
         Scanner scanner = new Scanner(System.in);
@@ -167,7 +425,7 @@ public class Vista {
         int numero = 0;
         try {
             numero = Integer.parseInt(scanner.nextLine());
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return numero;
@@ -179,7 +437,7 @@ public class Vista {
         double numero = 0;
         try {
             numero = Double.parseDouble(scanner.nextLine());
-        } catch (Exception e){
+        } catch (Exception e) {
             /*printStackTrace() sirve para excepciones
             //además del error, da detalles de en qué linea
             y en qué clase ha ocurrido la excepción*/

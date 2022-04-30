@@ -4,13 +4,38 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "clientes", schema = "fp_206_java_con_mysql", catalog = "")
+@NamedQueries({
+        @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
+        @NamedQuery(name = "Cliente.findAllEstandar", query = "SELECT c FROM Cliente c WHERE c.cuota = 0"),
+        @NamedQuery(name = "Cliente.findAllPremium", query = "SELECT c FROM Cliente c WHERE c.cuota = 30")
+})
 public class Cliente {
     private String email;
     private String nombre;
     private String domicilio;
     private String nif;
-    private Integer cuota;
-    private Integer descuento;
+    private int cuota;
+    private int descuento;
+
+    public Cliente() {
+    }
+
+    public Cliente(String email, String nombre, String domicilio, String nif, int cuota, int descuento) {
+        this.email = email;
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.nif = nif;
+        this.cuota = cuota;
+        this.descuento = descuento;
+    }
+
+    public Cliente(String nombre, String domicilio, String nif, int cuota, int descuento) {
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.nif = nif;
+        this.cuota = cuota;
+        this.descuento = descuento;
+    }
 
     @Id
     @Column(name = "email")
@@ -54,21 +79,21 @@ public class Cliente {
 
     @Basic
     @Column(name = "cuota")
-    public Integer getCuota() {
+    public int getCuota() {
         return cuota;
     }
 
-    public void setCuota(Integer cuota) {
+    public void setCuota(int cuota) {
         this.cuota = cuota;
     }
 
     @Basic
     @Column(name = "descuento")
-    public Integer getDescuento() {
+    public int getDescuento() {
         return descuento;
     }
 
-    public void setDescuento(Integer descuento) {
+    public void setDescuento(int descuento) {
         this.descuento = descuento;
     }
 
@@ -83,8 +108,8 @@ public class Cliente {
         if (nombre != null ? !nombre.equals(cliente.nombre) : cliente.nombre != null) return false;
         if (domicilio != null ? !domicilio.equals(cliente.domicilio) : cliente.domicilio != null) return false;
         if (nif != null ? !nif.equals(cliente.nif) : cliente.nif != null) return false;
-        if (cuota != null ? !cuota.equals(cliente.cuota) : cliente.cuota != null) return false;
-        if (descuento != null ? !descuento.equals(cliente.descuento) : cliente.descuento != null) return false;
+        if (cuota != cliente.cuota) return false;
+        if (descuento != cliente.descuento) return false;
 
         return true;
     }
@@ -95,8 +120,8 @@ public class Cliente {
         result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
         result = 31 * result + (domicilio != null ? domicilio.hashCode() : 0);
         result = 31 * result + (nif != null ? nif.hashCode() : 0);
-        result = 31 * result + (cuota != null ? cuota.hashCode() : 0);
-        result = 31 * result + (descuento != null ? descuento.hashCode() : 0);
+        result = 31 * result + cuota;
+        result = 31 * result + descuento;
         return result;
     }
 

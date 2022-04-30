@@ -5,6 +5,11 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "pedidos", schema = "fp_206_java_con_mysql", catalog = "")
+@NamedQueries({
+        @NamedQuery(name = "Pedido.findAll", query = "SELECT p FROM Pedido p"),
+        @NamedQuery(name = "Pedido.findAllPendiente", query = "SELECT p FROM Pedido p WHERE p.procesado = false"),
+        @NamedQuery(name = "Pedido.findAllEnviado", query = "SELECT p FROM Pedido p WHERE p.procesado = true")
+})
 public class Pedido {
     private int numeroPedido;
     private int cantidad;
@@ -12,6 +17,30 @@ public class Pedido {
     private boolean procesado;
     private Cliente clientesByEmailCliente;
     private Articulo articulosByCodigoArticulo;
+
+    public Pedido() {
+    }
+
+    public Pedido(int numeroPedido) {
+        this.numeroPedido = numeroPedido;
+    }
+
+    public Pedido(int numeroPedido, int cantidad, Timestamp fecha, boolean procesado, Cliente clientesByEmailCliente, Articulo articulosByCodigoArticulo) {
+        this.numeroPedido = numeroPedido;
+        this.cantidad = cantidad;
+        this.fecha = fecha;
+        this.procesado = procesado;
+        this.clientesByEmailCliente = clientesByEmailCliente;
+        this.articulosByCodigoArticulo = articulosByCodigoArticulo;
+    }
+
+    public Pedido(int cantidad, Timestamp fecha, boolean procesado, Cliente clientesByEmailCliente, Articulo articulosByCodigoArticulo) {
+        this.cantidad = cantidad;
+        this.fecha = fecha;
+        this.procesado = procesado;
+        this.clientesByEmailCliente = clientesByEmailCliente;
+        this.articulosByCodigoArticulo = articulosByCodigoArticulo;
+    }
 
     @Id
     @Column(name = "numero_pedido")
